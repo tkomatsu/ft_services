@@ -1,9 +1,13 @@
 FROM	alpine:3.13
 LABEL	miantainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
+ENV		WORDPRESS_DB_NAME wordpress
+ENV		WORDPRESS_DB_USER user
+ENV		WORDPRESS_DB_PASSWORD password
+ENV		WORDPRESS_DB_HOST localhost
+
 RUN		set -x \
-		&& apk --update --no-cache add	fcgi \
-										nginx \
+		&& apk --update --no-cache add	nginx \
 										openssl \
 										php7 \
 										php7-cgi \
@@ -36,15 +40,19 @@ RUN		mkdir /etc/nginx/ssl \
 						-out /etc/nginx/ssl/server.crt \
 						-subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo"
 
-COPY	./srcs/wordpress /var/www/html
+# install wordpress
+#COPY	./srcs/wordpress /var/www/html
+RUN		wget http://wordpress.org/latest.tar.gz \
+		&& tar -xvf latest.tar.gz \
+		&& rm latest.tar.gz \
+		&& mv wordpress /var/www/html
 
 RUN		mkdir -p /run/nginx
 RUN		mkdir -p /run/php-fpm
 COPY	./srcs/default.conf /etc/nginx/http.d/default.conf
-COPY	./srcs/www.conf /etc/php7/php-fpm.d/www.conf
 
-#COPY	./srcs/init.sh /
-#RUN		chmod 755 /init.sh
+COPY	./srcs/init.sh /
+RUN		chmod 755 /init.sh
 
-#CMD		[ "/init.sh" ]
-CMD			[ "nginx", "-g", "daemon off;" ]
+CMD		[ "/init.sh" ]
+#CMD			[ "nginx", "-g", "daemon off;" ]

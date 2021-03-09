@@ -1,0 +1,66 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    wordpress.yaml                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
+#    Updated: 2021/03/08 21:52:58 by tkomatsu         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      name: wordpress-pod
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: tkomatsu/wordpress:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5050
+        env:
+        - name: WORDPRESS_DB_NAME
+          value: wordpress_db
+        - name: WORDPRESS_DB_USER
+          value: username
+        - name: WORDPRESS_DB_PASSWORD
+          value: password
+        - name: WORDPRESS_DB_HOST
+          value: mysql_host
+        - name: WORDPRESS_DB_CHARSET
+          value: utf8
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  annotations:
+    metallb.universe.tf/allow-shared-ip: ft_services
+  labels:
+    app: wordpress
+spec:
+  selector:
+    app: wordpress
+  type: LoadBalancer
+  ports:
+  - name: mmcc
+    protocol: TCP
+    port: 5050
+    targetPort: 5050
