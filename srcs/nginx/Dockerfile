@@ -1,8 +1,10 @@
-FROM	alpine:3.13
+FROM	alpine:latest
 LABEL	miantainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
+RUN		echo -e "http://nl.alpinelinux.org/alpine/v3.5/main\nhttp://nl.alpinelinux.org/alpine/v3.5/community" > /etc/apk/repositories
 RUN		set -x \
-		&& apk --update --no-cache add nginx openssl
+		&& apk update \
+		&& apk --no-cache add nginx openssl
 
 RUN		mkdir /etc/nginx/ssl \
 		&& openssl genrsa -out /etc/nginx/ssl/server.key 2048 \

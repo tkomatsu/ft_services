@@ -1,9 +1,9 @@
 #!/bin/sh
 
-sed -e s/database_name_here/$WORDPRESS_DB_NAME/g \
-	-e s/username_here/$WORDPRESS_DB_USER/g \
-	-e s/password_here/$WORDPRESS_DB_PASSWORD/g \
-	-e s/localhost/$WORDPRESS_DB_HOST/g \
+sed -e s/database_name_here/$MYSQL_DATABASE/g \
+	-e s/username_here/$MYSQL_USER/g \
+	-e s/password_here/$MYSQL_PASSWORD/g \
+	-e s/localhost/$MYSQL_HOST/g \
 	/var/www/html/wp-config-sample.php \
 	> /var/www/html/wp-config.php
 

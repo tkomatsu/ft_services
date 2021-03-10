@@ -2,7 +2,11 @@ FROM	alpine:3.13
 LABEL	miantainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
 # default password
-ENV		MYSQL_ROOT_PASSWORD=password
+ENV		MYSQL_ROOT_PASSWORD=rootpass \
+		MYSQL_DATABASE=wordpress \
+		MYSQL_USER=wp_user \
+		MYSQL_PASSWORD=wp_pass\
+		MYSQL_HOST=localhost
 
 RUN		set -x \
 		&& apk update \

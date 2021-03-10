@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 GREY="\033[30m"
 RED="\033[31m"
@@ -11,6 +11,7 @@ WHITE="\033[37m"
 END="\033[0m"
 
 SERVICE=(
+nginx
 #	ftps
 #	grafana
 #	influxdb
@@ -34,16 +35,16 @@ build_container () {
 }
 
 install_metallb () {
-	# see what changes would be made, returns nonzero returncode if different
-	kubectl get configmap kube-proxy -n kube-system -o yaml | \
-	sed -e "s/strictARP: false/strictARP: true/" | \
-	sed -e "s/mode: \"\"/mode: \"ipvs\"/" | \
-	kubectl diff -f - -n kube-system
-	# apply
-	kubectl get configmap kube-proxy -n kube-system -o yaml | \
-	sed -e "s/strictARP: false/strictARP: true/" | \
-	sed -e "s/mode: \"\"/mode: \"ipvs\"/" | \
-	kubectl apply -f - -n kube-system
+#	# see what changes would be made, returns nonzero returncode if different
+#	kubectl get configmap kube-proxy -n kube-system -o yaml | \
+#	sed -e "s/strictARP: false/strictARP: true/" | \
+#	sed -e "s/mode: \"\"/mode: \"ipvs\"/" | \
+#	kubectl diff -f - -n kube-system
+#	# apply
+#	kubectl get configmap kube-proxy -n kube-system -o yaml | \
+#	sed -e "s/strictARP: false/strictARP: true/" | \
+#	sed -e "s/mode: \"\"/mode: \"ipvs\"/" | \
+#	kubectl apply -f - -n kube-system
 
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
@@ -64,4 +65,3 @@ initialize
 build_container
 install_metallb
 set_services
-greeting

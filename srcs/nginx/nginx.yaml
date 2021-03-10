@@ -6,14 +6,14 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 14:43:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/02 14:48:50 by user42           ###   ########.fr        #
+#    Updated: 2021/03/13 10:10:34 by tkomatsu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-deployment
   labels:
     app: nginx
 spec:
@@ -23,7 +23,6 @@ spec:
       app: nginx
   template:
     metadata:
-      name: nginx-pod
       labels:
         app: nginx
     spec:
@@ -33,23 +32,24 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 80
+          name: http
         - containerPort: 443
+          name: https
         - containerPort: 22
+          name: ssh
+
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-service
   annotations:
     metallb.universe.tf/allow-shared-ip: ft_services
-  labels:
-    app: nginx
 spec:
   selector:
     app: nginx
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.42
   ports:
   - name: http
     protocol: TCP

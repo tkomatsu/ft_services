@@ -1,10 +1,13 @@
 FROM	alpine:3.13
 LABEL	miantainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
-ENV		WORDPRESS_DB_NAME wordpress
-ENV		WORDPRESS_DB_USER user
-ENV		WORDPRESS_DB_PASSWORD password
-ENV		WORDPRESS_DB_HOST localhost
+ENV		MYSQL_ROOT_PASSWORD=password \
+		MYSQL_DATABASE=wordpress \
+		MYSQL_USER=user \
+		MYSQL_PASSWORD=password \
+		MYSQL_HOST=localhost
+
+EXPOSE	5050
 
 RUN		set -x \
 		&& apk --update --no-cache add	nginx \
