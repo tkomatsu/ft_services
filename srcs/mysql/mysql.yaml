@@ -6,31 +6,33 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 14:43:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/11 09:04:16 by tkomatsu         ###   ########.fr        #
+#    Updated: 2021/03/13 21:40:05 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apiVersion: v1
-kind: Service
+kind: PersistentVolumeClaim
 metadata:
-  name: mysql
-spec:
-  type: ClusterIP
-  selector:
+  name: mysql-pvc
+  labels:
     app: mysql
-  ports:
-  - port: 3306
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
 ---
 
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: mysql
+  name: mysql-deployment
 spec:
   selector:
     matchLabels:
       app: mysql
-  serviceName: mysql-service
   replicas: 1
   template:
     metadata:
@@ -45,30 +47,56 @@ spec:
         - containerPort: 3306
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: somewordpress
+            valueFrom:
+              configMapKeyRef:
+                name: ft-secret
+                key: mysql_root_password
+                optional: false
           - name: MYSQL_DATABASE
-            value: wordpress
+            valueFrom:
+              configMapKeyRef:
+                name: ft-secret
+                key: db_name
+                optional: false
           - name: MYSQL_USER
-            value: wordpress
+            valueFrom:
+              configMapKeyRef:
+                name: ft-secret
+                key: db_user
+                optional: false
           - name: MYSQL_PASSWORD
-            value: wordpress
+            valueFrom:
+              configMapKeyRef:
+                name: ft-secret
+                key: db_pass
+                optional: false
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: ft-secret
+                key: db_host
+                optional: false
         volumeMounts:
-          - name: mysql-pvc
+          - name: mysql-storage
             mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
 ---
 
 apiVersion: v1
-kind: PersistentVolume
+kind: Service
 metadata:
-  name: mariadb-pv-volume
+  name: mysql-service
   labels:
-    type: local
-    app: mariadb
-  spec:
-    storageClassName: manual
-    capacity:
-      storage: 1Gi
-    accessModes:
-      - ReadWriteOnce
-    hostpath:
-      path: 
+    app: mysql
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+    protocol: TCP

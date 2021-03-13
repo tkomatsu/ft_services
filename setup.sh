@@ -14,7 +14,7 @@ SERVICE=(
 #	ftps
 #	grafana
 #	influxdb
-#	mysql
+	mysql
 	nginx
 #	phpmyadmin
 #	wordpress
@@ -24,6 +24,7 @@ initialize () {
 	minikube start --driver=docker --extra-config=apiserver.service-node-port-range=1-65535
 	minikube docker-env
 	eval $(minikube -p minikube docker-env)
+	kubectl apply -f srcs/secret.yaml
 }
 
 build_container () {
