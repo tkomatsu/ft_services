@@ -11,7 +11,6 @@ WHITE="\033[37m"
 END="\033[0m"
 
 SERVICE=(
-nginx
 #	ftps
 #	grafana
 #	influxdb
@@ -65,3 +64,4 @@ initialize
 build_container
 install_metallb
 set_services
+eval $(minikube docker-env -u)
