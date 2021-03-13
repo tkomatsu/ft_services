@@ -17,7 +17,7 @@ RUN		mkdir /etc/nginx/ssl \
 
 RUN		mkdir -p /run/nginx
 
-COPY	./srcs/default.conf /etc/nginx/http.d/default.conf
+COPY	./srcs/default.conf /etc/nginx/conf.d/default.conf
 COPY	./srcs/index.html /var/www/index.html
 
 CMD		[ "nginx", "-g", "daemon off;" ]
