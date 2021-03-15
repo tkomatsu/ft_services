@@ -36,4 +36,4 @@ EOF
 fi
 
 /usr/bin/mysqld_safe --datadir='/var/lib/mysql'
-tail -f /dev/null
+tail -f /var/lib/mysql/mysql-deployment-*.err
