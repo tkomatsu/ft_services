@@ -16,18 +16,11 @@ verify_env() {
 	fi
 }
 
-_main() {
-	if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
-		verify_env
-
-
-	fi
-}
-
-_main "$@"
-
-
-if [ ! -d /run/mysqld ]; then
+if [ ! -d /var/lib/mysql/]; then
+	verify_env
+# initialize MariaDB
+# https://mariadb.com/kb/en/mysql_install_db/
+	mysql_install_db --datadir=/var/lib/mysql --auth-root-authentication-method=normal
 	cat << EOF > init.sql
 USE mysql;
 FLUSH PRIVILEGES ;
@@ -39,8 +32,8 @@ GRANT ALL ON ${MYSQL_DATABASE}.* TO ${MYSQL_USER}@'%' IDENTIFIED BY '${MYSQL_PAS
 FLUSH PRIVILEGES ;
 EOF
 	/usr/bin/mysqld --user=mysql --bootstrap < init.sql
-#	rm init.sql
+	rm -f init.sql
 fi
 
 /usr/bin/mysqld_safe --datadir='/var/lib/mysql'
-
+tail -f /dev/null
