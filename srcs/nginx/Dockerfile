@@ -1,5 +1,5 @@
 FROM	alpine:3.13
-LABEL	miantainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
+LABEL	maintainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
 RUN		echo -e "http://nl.alpinelinux.org/alpine/v3.5/main\nhttp://nl.alpinelinux.org/alpine/v3.5/community" > /etc/apk/repositories
 RUN		set -x \
