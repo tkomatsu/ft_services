@@ -17,7 +17,7 @@ SERVICE=(
 	mysql
 	nginx
 #	phpmyadmin
-#	wordpress
+	wordpress
 )
 
 initialize () {
