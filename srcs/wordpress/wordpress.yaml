@@ -6,7 +6,7 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
-#    Updated: 2021/03/16 18:31:04 by user42           ###   ########.fr        #
+#    Updated: 2021/03/16 20:23:54 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,11 +82,6 @@ spec:
             value: peter.parker@example.com
           - name: WP_PASS2
             value: password
-          - name: MINIKUBE_IP
-            valueFrom:
-              secretKeyRef:
-                name: ft-secret
-                key: minikube_ip
  
 ---
 
