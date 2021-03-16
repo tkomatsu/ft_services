@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 14:43:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/14 21:02:50 by user42           ###   ########.fr        #
+#    Updated: 2021/03/16 10:41:38 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  volumeMode: Filesystem
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
 ---
@@ -28,7 +28,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql
 spec:
   selector:
     matchLabels:
@@ -51,31 +51,26 @@ spec:
               secretKeyRef:
                 name: ft-secret
                 key: mysql_root_password
-                optional: false
           - name: MYSQL_DATABASE
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_name
-                optional: false
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_user
-                optional: false
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_pass
-                optional: false
           - name: MYSQL_HOST
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_host
-                optional: false
         volumeMounts:
           - name: mysql-storage
             mountPath: /var/lib/mysql
