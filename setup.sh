@@ -21,7 +21,7 @@ SERVICE=(
 )
 
 initialize () {
-	minikube start --driver=docker --extra-config=apiserver.service-node-port-range=1-65535
+	minikube start --driver=docker
 	minikube docker-env
 	eval $(minikube -p minikube docker-env)
 	kubectl apply -f srcs/config.yaml
@@ -35,17 +35,6 @@ build_container () {
 }
 
 install_metallb () {
-#	# see what changes would be made, returns nonzero returncode if different
-#	kubectl get configmap kube-proxy -n kube-system -o yaml | \
-#	sed -e "s/strictARP: false/strictARP: true/" | \
-#	sed -e "s/mode: \"\"/mode: \"ipvs\"/" | \
-#	kubectl diff -f - -n kube-system
-#	# apply
-#	kubectl get configmap kube-proxy -n kube-system -o yaml | \
-#	sed -e "s/strictARP: false/strictARP: true/" | \
-#	sed -e "s/mode: \"\"/mode: \"ipvs\"/" | \
-#	kubectl apply -f - -n kube-system
-
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
