@@ -40,7 +40,7 @@ RUN		mkdir /etc/nginx/ssl \
 RUN		wget http://wordpress.org/latest.tar.gz \
 		&& tar -xvf latest.tar.gz \
 		&& rm latest.tar.gz \
-		&& mv wordpress /var/www/html
+		&& mv wordpress /var/www/wordpress
 
 # install wp-cli
 RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
