@@ -30,6 +30,7 @@ initialize () {
 build_container () {
 	printf "${GREEN}Image building ...\n${END}"
 	for e in ${SERVICE[@]}; do
+		printf "${BLUE}${e} building ...\n${END}"
 		docker build -t tkomatsu/${e} -q ./srcs/${e}/
 	done
 }
