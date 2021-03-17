@@ -16,7 +16,7 @@ SERVICE=(
 #	influxdb
 	mysql
 	nginx
-#	phpmyadmin
+	phpmyadmin
 	wordpress
 )
 
