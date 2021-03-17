@@ -42,7 +42,7 @@ RUN		wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-
 		&& tar xvf phpMyAdmin-5.0.2-all-languages.tar.gz \
 		&& rm phpMyAdmin-5.0.2-all-languages.tar.gz \
 		&& mv phpMyAdmin-5.0.2-all-languages /var/www/phpmyadmin/ \
-		&& chmod -R 777 /var/www/phpmyadmin/
+		&& chown -R nginx:nginx /var/www/phpmyadmin/
 
 RUN		mkdir -p /run/nginx
 RUN		mkdir -p /run/php-fpm
