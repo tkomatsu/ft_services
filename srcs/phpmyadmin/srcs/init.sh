@@ -3,7 +3,6 @@
 sed	-e "s/localhost/$PMA_HOST/g" \
 	/var/www/phpmyadmin/config.sample.inc.php \
 	> /var/www/phpmyadmin/config.inc.php
-chmod 777 /var/www/phpmyadmin/config.inc.php
 
 sed -i \
 	-e s/';listen.owner = nobody'/'listen.owner = nginx'/g \
