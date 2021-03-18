@@ -36,12 +36,6 @@ RUN		mkdir /etc/nginx/ssl \
 						-out /etc/nginx/ssl/server.crt \
 						-subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo"
 
-# install wordpress
-RUN		wget http://wordpress.org/latest.tar.gz \
-		&& tar -xvf latest.tar.gz \
-		&& rm latest.tar.gz \
-		&& mv wordpress /var/www/wordpress
-
 # install wp-cli
 RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 		&& chmod +x wp-cli.phar \

@@ -1,11 +1,21 @@
 #!/bin/sh
 
-sed -e "s/database_name_here/$WORDPRESS_DB_NAME/g" \
-	-e "s/username_here/$WORDPRESS_DB_USER/g" \
-	-e "s/password_here/$WORDPRESS_DB_PASSWORD/g" \
-	-e "s/localhost/$WORDPRESS_DB_HOST/g" \
-	/var/www/wordpress/wp-config-sample.php \
-	> /var/www/wordpress/wp-config.php
+# install wordpress
+if [ ! "$(ls -A /var/www/wordpress)" ]; then
+	wget http://wordpress.org/latest.tar.gz \
+	&& tar -xvf latest.tar.gz \
+	&& rm latest.tar.gz \
+	&& cp -r wordpress /var/www \
+	&& rm -fr /wordpress \
+	&& chmod +x /var/www/wordpress/
+
+	sed -e "s/database_name_here/$WORDPRESS_DB_NAME/g" \
+		-e "s/username_here/$WORDPRESS_DB_USER/g" \
+		-e "s/password_here/$WORDPRESS_DB_PASSWORD/g" \
+		-e "s/localhost/$WORDPRESS_DB_HOST/g" \
+		/var/www/wordpress/wp-config-sample.php \
+		> /var/www/wordpress/wp-config.php
+fi
 
 sed -i \
 	-e s/';listen.owner = nobody'/'listen.owner = nginx'/g \
