@@ -6,25 +6,9 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
-#    Updated: 2021/03/18 11:36:07 by user42           ###   ########.fr        #
+#    Updated: 2021/03/18 12:06:13 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wordpress-pvc
-  labels:
-    app: wordpress
-spec:
-  resources:
-    requests:
-      storage: 2Gi
-  storageClassName: standard
-  accessModes:
-    - ReadWriteOnce
-
----
 
 apiVersion: apps/v1
 kind: Deployment
