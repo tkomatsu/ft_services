@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 20:15:24 by user42            #+#    #+#              #
-#    Updated: 2021/03/13 21:39:56 by user42           ###   ########.fr        #
+#    Updated: 2021/03/18 09:09:38 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ metadata:
 type: Opaque
 stringData:
   mysql_root_password: rootpass
-  db_name: wp_db
+  db_name: wordpress
   db_user: wp_user
   db_pass: userpass
   db_host: localhost
