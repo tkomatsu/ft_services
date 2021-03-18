@@ -49,6 +49,18 @@ set_services () {
 	done
 }
 
+greeting () {
+	printf ${CYAN}
+	echo '  __ _                         _               '
+	echo ' / _| |                       (_)              '
+	echo '| |_| |_   ___  ___ _ ____   ___  ___ ___  ___ '
+	echo '|  _| __| / __|/ _ \ '\''__\ \ / / |/ __/ _ \/ __|'
+	echo '| | | |_  \__ \  __/ |   \ V /| | (_|  __/\__ \'
+	echo '|_|  \__| |___/\___|_|    \_/ |_|\___\___||___/'
+	echo ''
+	printf "open `minikube ip`:80 on browser\n${END}"
+}
+
 minikube stop
 minikube delete
 initialize
@@ -56,3 +68,4 @@ install_metallb
 build_container
 set_services
 eval $(minikube docker-env -u)
+greeting
