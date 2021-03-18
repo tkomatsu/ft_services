@@ -6,7 +6,7 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
-#    Updated: 2021/03/18 12:06:13 by user42           ###   ########.fr        #
+#    Updated: 2021/03/18 12:22:14 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ spec:
       app: wordpress
   template:
     metadata:
-      name: wordpress-pod
+      name: wordpress
       labels:
         app: wordpress
     spec:
@@ -31,7 +31,6 @@ spec:
         - name: wordpress-storage
           persistentVolumeClaim:
             claimName: wordpress-pvc
-
       containers:
       - name: wordpress
         image: tkomatsu/wordpress:latest
@@ -63,17 +62,26 @@ spec:
                 name: ft-secret
                 key: db_pass
           - name: WORDPRESS_DB_HOST
-            value: mysql-service:3306
+            value: mysql:3306
           - name: WORDPRESS_DB_CHARSET
             value: utf8
           - name: WP_TITLE
             value: ft_services
           - name: WP_ADMIN
-            value: admin
+            valueFrom:
+              secretKeyRef:
+                name: ft-secret
+                key: wp_admin
           - name: WP_ADMIN_PASS
-            value: password
+            valueFrom:
+              secretKeyRef:
+                name: ft-secret
+                key: wp_adminpass
           - name: WP_ADMIN_MAIL
-            value: admin@example.com
+            valueFrom:
+              secretKeyRef:
+                name: ft-secret
+                key: wp_adminmail
           - name: WP_USER1
             value: tony
           - name: WP_MAIL1

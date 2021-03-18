@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 20:15:24 by user42            #+#    #+#              #
-#    Updated: 2021/03/18 12:10:23 by user42           ###   ########.fr        #
+#    Updated: 2021/03/18 12:22:05 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ stringData:
   db_user: wp_user
   db_pass: userpass
   db_host: localhost
+  wp_admin: admin
+  wp_adminpass: password
+  wp_adminmail: admin@example.com
 
 ---
 
