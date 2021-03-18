@@ -52,7 +52,7 @@ set_services () {
 minikube stop
 minikube delete
 initialize
-build_container
 install_metallb
+build_container
 set_services
 eval $(minikube docker-env -u)
