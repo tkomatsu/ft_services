@@ -11,7 +11,7 @@ WHITE="\033[37m"
 END="\033[0m"
 
 SERVICE=(
-#	ftps
+	ftps
 #	grafana
 #	influxdb
 	mysql

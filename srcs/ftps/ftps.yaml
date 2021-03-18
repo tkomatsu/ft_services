@@ -1,0 +1,77 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ftps.yaml                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/03/18 08:54:59 by user42            #+#    #+#              #
+#    Updated: 2021/03/18 16:36:08 by user42           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps
+  labels:
+    app: ftps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      volumes:
+        - name: wordpress-storage
+          persistentVolumeClaim:
+            claimName: wordpress-pvc
+      containers:
+      - name: ftps
+        image: tkomatsu/ftps:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 20
+        - containerPort: 21
+        - containerPort: 60000
+        - containerPort: 60001
+        volumeMounts:
+          - name: wordpress-storage
+            mountPath: /var/lib/ftp
+        env:
+          - name: FTP_USER
+            valueFrom:
+              secretKeyRef:
+                name: ft-secret
+                key: wp_admin
+          - name: FTP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ft-secret
+                key: wp_adminpass
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: ft_services
+spec:
+  selector:
+    app: ftps
+  type: LoadBalancer
+  ports:
+  - name: ftps-data
+    port: 20
+  - name: ftps-contorol
+    port: 21
+  - name: ftps-pasv-0
+    port: 60000
+  - name: ftps-pasv-1
+    port: 60001
