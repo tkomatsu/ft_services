@@ -6,7 +6,7 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
-#    Updated: 2021/03/16 20:23:54 by user42           ###   ########.fr        #
+#    Updated: 2021/03/18 09:02:06 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,25 +39,21 @@ spec:
               secretKeyRef:
                 name: ft-secret
                 key: mysql_root_password
-                optional: false
           - name: WORDPRESS_DB_NAME
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_name
-                optional: false
           - name: WORDPRESS_DB_USER
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_user
-                optional: false
           - name: WORDPRESS_DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: ft-secret
                 key: db_pass
-                optional: false
           - name: WORDPRESS_DB_HOST
             value: mysql-service:3306
           - name: WORDPRESS_DB_CHARSET
