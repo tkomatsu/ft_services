@@ -24,7 +24,7 @@ initialize () {
 	minikube start --driver=docker
 	minikube docker-env
 	eval $(minikube -p minikube docker-env)
-	kubectl apply -f srcs/config.yaml
+	kubectl apply -f srcs/config/config.yaml
 }
 
 build_container () {
@@ -39,7 +39,7 @@ install_metallb () {
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-	kubectl apply -f srcs/metallb/metallb-configmap.yaml
+	kubectl apply -f srcs/config/metallb-configmap.yaml
 }
 
 set_services () {

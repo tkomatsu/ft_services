@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 20:15:24 by user42            #+#    #+#              #
-#    Updated: 2021/03/18 12:22:05 by user42           ###   ########.fr        #
+#    Updated: 2021/03/19 10:33:01 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,15 @@ stringData:
   mysql_root_password: rootpass
   db_name: wordpress
   db_user: wp_user
-  db_pass: userpass
+  db_pass: password
   db_host: localhost
   wp_admin: admin
   wp_adminpass: password
   wp_adminmail: admin@example.com
+  influxdb_name: influx_user
+  influxdb_password: passowrd
+  influxdb_organization: ft_services
+  influxdb_bucket: bucket
 
 ---
 
@@ -49,6 +53,22 @@ metadata:
   name: mysql-pvc
   labels:
     app: mysql
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pvc
+  labels:
+    app: influxdb
 spec:
   resources:
     requests:
