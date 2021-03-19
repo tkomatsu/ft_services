@@ -1,6 +1,7 @@
 FROM	alpine:3.13
 LABEL	maintainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
+RUN		echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories
 RUN		set -x \
 		&& apk --update --no-cache add	nginx \
 										openssl \
@@ -25,7 +26,8 @@ RUN		set -x \
 										php7-posix \
 										php7-soap \
 										php7-xml \
-										php7-xmlrpc
+										php7-xmlrpc \
+										telegraf
 
 RUN		mkdir /etc/nginx/ssl \
 		&& openssl genrsa -out /etc/nginx/ssl/server.key 2048 \

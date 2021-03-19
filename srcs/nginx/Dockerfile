@@ -1,10 +1,10 @@
 FROM	alpine:3.13
 LABEL	maintainer="Tatsuhiro Komatsu <tkomatsu@student.42tokyo.jp>"
 
-RUN		echo -e "http://nl.alpinelinux.org/alpine/v3.5/main\nhttp://nl.alpinelinux.org/alpine/v3.5/community" > /etc/apk/repositories
+RUN		echo "https://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories
 RUN		set -x \
 		&& apk update \
-		&& apk --no-cache add nginx openssl
+		&& apk --no-cache add nginx openssl telegraf
 
 RUN		mkdir /etc/nginx/ssl \
 		&& openssl genrsa -out /etc/nginx/ssl/server.key 2048 \
