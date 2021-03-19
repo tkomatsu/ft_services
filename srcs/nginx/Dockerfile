@@ -17,7 +17,12 @@ RUN		mkdir /etc/nginx/ssl \
 
 RUN		mkdir -p /run/nginx
 
+COPY	./srcs/telegraf.conf /etc/telegraf.conf
+
 COPY	./srcs/default.conf /etc/nginx/conf.d/default.conf
 COPY	./srcs/index.html /var/www/index.html
 
-CMD		[ "nginx", "-g", "daemon off;" ]
+COPY	./srcs/init.sh /
+RUN		chmod +x /init.sh
+
+CMD		[ "/init.sh" ]

@@ -17,6 +17,8 @@ RUN		mkdir -p /etc/vsftpd/ssl \
 						-keyout /etc/vsftpd/ssl/server.key \
 						-out /etc/vsftpd/ssl/server.crt
 
+COPY	./srcs/telegraf.conf /etc/telegraf.conf
+
 COPY	./srcs/init.sh /
 RUN		chmod +x /init.sh
 

@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 08:56:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/18 12:15:10 by user42           ###   ########.fr        #
+#    Updated: 2021/03/19 16:31:09 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ spec:
         ports:
         - containerPort: 5000
         env:
+          - name: SERVICE
+            value: phpmyadmin
           - name: PMA_USER
             valueFrom:
               secretKeyRef:

@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 14:43:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/18 12:14:44 by user42           ###   ########.fr        #
+#    Updated: 2021/03/19 16:30:36 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ spec:
         ports:
         - containerPort: 3306
         env:
+          - name: SERVICE
+            value: mysql
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:

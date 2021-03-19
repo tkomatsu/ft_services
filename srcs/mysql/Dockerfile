@@ -8,6 +8,8 @@ RUN		set -x \
 
 RUN		sed -i -e s/skip-networking/'#skip-networking'/ /etc/my.cnf.d/mariadb-server.cnf
 
+COPY	./srcs/telegraf.conf /etc/telegraf.conf
+
 COPY	./srcs/init.sh /
 RUN		chmod 755 /init.sh
 

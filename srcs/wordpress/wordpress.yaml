@@ -6,7 +6,7 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
-#    Updated: 2021/03/18 12:22:14 by user42           ###   ########.fr        #
+#    Updated: 2021/03/19 16:31:47 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ spec:
           - name: wordpress-storage
             mountPath: /var/www/wordpress
         env:
+          - name: SERVICE
+            value: wordpress
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:

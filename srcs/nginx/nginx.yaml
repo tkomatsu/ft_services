@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 14:43:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/17 11:38:41 by user42           ###   ########.fr        #
+#    Updated: 2021/03/19 16:30:50 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ spec:
       - name: nginx
         image: tkomatsu/nginx:latest
         imagePullPolicy: Never
+        env:
+          - name: SERVICE
+            value: nginx
         ports:
         - containerPort: 80
           name: http

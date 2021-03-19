@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/18 08:54:59 by user42            #+#    #+#              #
-#    Updated: 2021/03/18 16:36:08 by user42           ###   ########.fr        #
+#    Updated: 2021/03/19 16:29:10 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ spec:
           - name: wordpress-storage
             mountPath: /var/lib/ftp
         env:
+          - name: SERVICE
+            value: ftps
           - name: FTP_USER
             valueFrom:
               secretKeyRef:

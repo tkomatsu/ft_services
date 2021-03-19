@@ -50,6 +50,8 @@ RUN		mkdir -p /run/nginx
 RUN		mkdir -p /run/php-fpm
 COPY	./srcs/default.conf /etc/nginx/http.d/default.conf
 
+COPY	./srcs/telegraf.conf /etc/telegraf.conf
+
 COPY	./srcs/init.sh /
 RUN		chmod +x /init.sh
 

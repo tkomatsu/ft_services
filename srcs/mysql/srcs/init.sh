@@ -37,5 +37,7 @@ fi
 
 chown -R mysql:mysql /var/lib/mysql/
 
+telegraf --config /etc/telegraf.conf &
+
 /usr/bin/mysqld_safe --datadir=/var/lib/mysql --plugin-dir=/usr/lib/mariadb/plugin
 tail -f /var/lib/mysql/mysql-*.err
