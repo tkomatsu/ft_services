@@ -13,7 +13,7 @@ END="\033[0m"
 SERVICE=(
 	ftps
 #	grafana
-#	influxdb
+	influxdb
 	mysql
 	nginx
 	phpmyadmin
