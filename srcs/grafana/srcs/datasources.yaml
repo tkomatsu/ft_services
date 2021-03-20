@@ -1,0 +1,78 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    datasources.yaml                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/03/20 17:59:00 by user42            #+#    #+#              #
+#    Updated: 2021/03/20 21:31:29 by user42           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: 1
+
+datasources:
+  - name: ftps
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: ftps
+    editable: true
+    isDefault: true
+  - name: 
+    type: grafana
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: grafana
+    editable: true
+    isDefault: true
+  - name: influxdb
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: influxdb
+    editable: true
+    isDefault: true
+  - name: mysql
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: mysql
+    editable: true
+    isDefault: true
+  - name: nginx
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: nginx
+    editable: true
+    isDefault: true
+  - name: phpmyadmin
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: phpmyadmin
+    editable: true
+    isDefault: true
+  - name: wordpress
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: wordpress
+    editable: true
+    isDefault: true
