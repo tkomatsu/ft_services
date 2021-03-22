@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 14:43:07 by user42            #+#    #+#              #
-#    Updated: 2021/03/19 16:30:50 by user42           ###   ########.fr        #
+#    Updated: 2021/03/22 22:00:48 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,11 @@ spec:
       - name: nginx
         image: tkomatsu/nginx:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         env:
           - name: SERVICE
             value: nginx

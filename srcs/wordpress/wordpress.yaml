@@ -6,7 +6,7 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 21:44:19 by tkomatsu          #+#    #+#              #
-#    Updated: 2021/03/19 16:31:47 by user42           ###   ########.fr        #
+#    Updated: 2021/03/22 22:01:07 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,11 @@ spec:
       - name: wordpress
         image: tkomatsu/wordpress:latest
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx && pgrep php-fpm"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 5050
         volumeMounts:
