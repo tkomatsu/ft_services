@@ -17,11 +17,7 @@ RUN		mkdir -p /etc/vsftpd/ssl \
 						-keyout /etc/vsftpd/ssl/server.key \
 						-out /etc/vsftpd/ssl/server.crt
 
-RUN		sed -i \
-			-e s/'hostname = ""'/'hostname = "ftps"'/ \
-			-e s/'# database = "telegraf"'/'database = "telegraf"'/ \
-			-e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
-			/etc/telegraf.conf
+COPY	./srcs/telegraf.conf /etc/telegraf.conf
 
 COPY	./srcs/init.sh /
 RUN		chmod +x /init.sh

@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: wordpress
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: wordpress
+    orgId: 1

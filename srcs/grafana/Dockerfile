@@ -21,19 +21,15 @@ RUN		mkdir -p /etc/grafana/ssl \
 						-keyout /etc/grafana/ssl/grafana.key \
 						-out /etc/grafana/ssl/grafana.crt
 
-ENV		GF_PATHS_CONFIG=/usr/share/grafana/conf/sample.ini \
-		GF_PATHS_DATA=/var/lib/grafana \
-		GF_PATHS_HOME=/usr/share/grafana \
-		GF_PATHS_LOGS=/var/log/grafana \
-		GF_PATHS_PLUGINS=/usr/share/grafana/plugins-bundled \
-		GF_PATHS_PROVISIONING=/usr/share/grafana/conf \
+ENV		GF_PATHS_PROVISIONING=/usr/share/grafana/conf/provisioning \
 		GF_SECURITY_ADMIN_USER=admin \
-		GF_SECURITY_ADMIN_PASSWORD=admin
+		GF_SECURITY_ADMIN_PASSWORD=password
 
 WORKDIR	/usr/share/grafana
 
 COPY	./srcs/telegraf.conf /etc/telegraf.conf
-COPY	./srcs/datasources.yaml /usr/share/grafana/conf/provisioning/datasources/datasources.yaml
+COPY	./srcs/defaults.ini /usr/share/grafana/conf/defaults.ini
+COPY	./srcs/db /usr/share/grafana/conf/provisioning/datasources
 
 COPY	./srcs/init.sh /
 RUN		chmod +x /init.sh

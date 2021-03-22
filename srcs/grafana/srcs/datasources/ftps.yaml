@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: ftps
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $USER
+    password: $PASSWORD
+    database: ftps
+    orgId: 1
