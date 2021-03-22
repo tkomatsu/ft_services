@@ -24,7 +24,7 @@ sed -i \
 	-e s/'group = nobody'/'group = nginx'/g \
 	/etc/php7/php-fpm.d/www.conf
 
-telegraf --config /etc/telegraf.conf
+telegraf --config /etc/telegraf.conf &
 
 php-fpm7
 nginx
