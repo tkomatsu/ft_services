@@ -29,6 +29,8 @@ RUN		set -x \
 										php7-xmlrpc \
 										telegraf
 
+RUN		wget http://wordpress.org/latest.tar.gz
+
 RUN		mkdir /etc/nginx/ssl \
 		&& openssl genrsa -out /etc/nginx/ssl/server.key 2048 \
 		&& openssl req -new \

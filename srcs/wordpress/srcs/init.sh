@@ -2,8 +2,7 @@
 
 # install wordpress
 if [ ! "$(ls -A /var/www/wordpress)" ]; then
-	wget http://wordpress.org/latest.tar.gz \
-	&& tar -xvf latest.tar.gz \
+	tar -xvf latest.tar.gz \
 	&& rm latest.tar.gz \
 	&& cp -r wordpress /var/www \
 	&& rm -fr /wordpress \
@@ -24,16 +23,16 @@ sed -i \
 	-e s/'group = nobody'/'group = nginx'/g \
 	/etc/php7/php-fpm.d/www.conf
 
-telegraf --config /etc/telegraf.conf &
-
-php-fpm7
-nginx
-
 until wp core install --url=192.168.49.2:5050 --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_MAIL --allow-root --path=/var/www/wordpress; do
 	sleep 5
 done
 
 wp user create $WP_USER1 $WP_MAIL1 --role=editor --user_pass=$WP_PASS1 --path=/var/www/wordpress --allow-root
 wp user create $WP_USER2 $WP_MAIL2 --role=editor --user_pass=$WP_PASS2 --path=/var/www/wordpress --allow-root
+
+telegraf --config /etc/telegraf.conf &
+
+php-fpm7
+nginx
 
 tail -f /var/log/nginx/access.log
