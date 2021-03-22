@@ -29,7 +29,7 @@ WORKDIR	/usr/share/grafana
 
 COPY	./srcs/telegraf.conf /etc/telegraf.conf
 COPY	./srcs/defaults.ini /usr/share/grafana/conf/defaults.ini
-COPY	./srcs/db /usr/share/grafana/conf/provisioning/datasources
+COPY	./srcs/datasources /usr/share/grafana/conf/provisioning/datasources
 
 COPY	./srcs/init.sh /
 RUN		chmod +x /init.sh
