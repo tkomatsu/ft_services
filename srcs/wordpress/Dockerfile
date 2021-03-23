@@ -47,7 +47,7 @@ RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.p
 
 RUN		mkdir -p /run/nginx
 RUN		mkdir -p /run/php-fpm
-COPY	./srcs/default.conf /etc/nginx/http.d/default.conf
+COPY	./srcs/default.conf /etc/nginx/conf.d/default.conf
 
 COPY	./srcs/telegraf.conf /etc/telegraf.conf
 
