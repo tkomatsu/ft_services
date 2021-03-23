@@ -59,7 +59,7 @@ greeting () {
 	echo '| | | |_  \__ \  __/ |   \ V /| | (_|  __/\__ \'
 	echo '|_|  \__| |___/\___|_|    \_/ |_|\___\___||___/'
 	echo ''
-	printf "open `minikube ip`:80 on browser\n${END}"
+	printf "open 192.168.49.50:80 on browser\n${END}"
 }
 
 minikube stop
@@ -68,5 +68,4 @@ initialize
 install_metallb
 build_container
 set_services
-eval $(minikube docker-env -u)
 greeting
