@@ -14,6 +14,14 @@ if [ ! "$(ls -A /var/www/wordpress)" ]; then
 		-e "s/localhost/$WORDPRESS_DB_HOST/g" \
 		/var/www/wordpress/wp-config-sample.php \
 		> /var/www/wordpress/wp-config.php
+
+	until wp core install --url=192.168.49.50:5050 --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_MAIL --allow-root --path=/var/www/wordpress; do
+		sleep 5
+	done
+
+	wp user create $WP_USER1 $WP_MAIL1 --role=editor --user_pass=$WP_PASS1 --path=/var/www/wordpress --allow-root
+	wp user create $WP_USER2 $WP_MAIL2 --role=editor --user_pass=$WP_PASS2 --path=/var/www/wordpress --allow-root
+
 fi
 
 sed -i \
@@ -22,13 +30,6 @@ sed -i \
 	-e s/'user = nobody'/'user = nginx'/g \
 	-e s/'group = nobody'/'group = nginx'/g \
 	/etc/php7/php-fpm.d/www.conf
-
-until wp core install --url=192.168.49.2:5050 --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASS --admin_email=$WP_ADMIN_MAIL --allow-root --path=/var/www/wordpress; do
-	sleep 5
-done
-
-wp user create $WP_USER1 $WP_MAIL1 --role=editor --user_pass=$WP_PASS1 --path=/var/www/wordpress --allow-root
-wp user create $WP_USER2 $WP_MAIL2 --role=editor --user_pass=$WP_PASS2 --path=/var/www/wordpress --allow-root
 
 telegraf --config /etc/telegraf.conf &
 
