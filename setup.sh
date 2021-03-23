@@ -22,6 +22,7 @@ SERVICE=(
 
 initialize () {
 	minikube start --driver=docker
+	minikube dashboard &
 	minikube docker-env
 	eval $(minikube -p minikube docker-env)
 	kubectl apply -f srcs/config/config.yaml
