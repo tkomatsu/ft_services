@@ -21,7 +21,7 @@ if [ ! "$(ls -A /var/www/wordpress)" ]; then
 
 	wp user create $WP_USER1 $WP_MAIL1 --role=editor --user_pass=$WP_PASS1 --path=/var/www/wordpress --allow-root
 	wp user create $WP_USER2 $WP_MAIL2 --role=editor --user_pass=$WP_PASS2 --path=/var/www/wordpress --allow-root
-
+	wp theme activate twentynineteen --path=/var/www/wordpress --allow-root
 fi
 
 sed -i \
